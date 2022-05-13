@@ -1,0 +1,12 @@
+{% extends 'articles/base.html' %}
+
+{% block title %}Articles{% endblock %}
+
+{% block content %}
+{% for ar in posts %}
+<h3>{{ ar.title }}</h3>
+<h4>{{ ar.author }}</h4>
+<p>{{ ar.content }}</p>
+<p>{{ ar.time_update }}</p>
+{% endfor %}
+{% endblock %}

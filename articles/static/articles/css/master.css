@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  font-family: 'Lato', sans-serif;
+}
+
+.sidebar {
+  width: 15%;
+  background-color: #f1f1f1;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
+.sidebar a {
+  display: block;
+  color: black;
+  padding: 16px;
+  text-decoration: none;
+  text-align: center;
+}
+
+.sidebar a:hover{
+  background-color: #555;
+  color: white;
+}
+
+ul{
+  list-style: none;
+}
+
+main.content {
+  margin-left: 15%;
+  padding: 3px 16px;
+}
+
+@media screen and (max-width: 600px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+
+  .sidebar a {
+    text-align: center;
+    padding: 10px;
+  }
+
+  main.content {
+    margin-left: 0;
+  }
+
+  ul{
+    display:table;
+    margin:auto;
+   }
+
+   ul li{
+    display:table-cell;
+    text-align:center;
+   }
+}
