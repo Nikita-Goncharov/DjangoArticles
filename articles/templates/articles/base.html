@@ -33,10 +33,6 @@
             <a href="{% url 'contact' %}">Contact</a>
             <a href="{% url 'about' %}">About</a>
             <a href="javascript:void(0);" class="icon" onclick="myFunction()"><i class="fa fa-bars"></i></a>
-        <!-- <a href="#home" class="active">Home</a>
-        <a href="#news">News</a>
-        <a href="#contact">Contact</a>
-        <a href="#about">About</a> --> 
     </aside>
     <script>
         function myFunction() {
@@ -46,10 +42,17 @@
           } else {
             x.className = "sidebar";
           }
+          
+          var x = document.getElementById("Content");
+          if (x.className === "content") {
+            x.className += " add";
+          } else {
+            x.className = "content";
+          }
         }
     </script>
       <!-- Page content -->
-      <main class="content">
+      <main class="content" id="Content">
         {% block content %}{% endblock %}
       </main>
       <!-- <footer class="fixed-bottom border-top">
