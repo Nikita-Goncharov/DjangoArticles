@@ -3,8 +3,8 @@ from .models import *
 
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('author', 'title', 'content', 'photo', 'time_create', 'time_update', 'is_published', 'category',)
-    list_display_links = ('author', 'title', 'content',)
+    list_display = ('user', 'title', 'content', 'photo', 'time_create', 'time_update', 'is_published', 'category',)
+    list_display_links = ('user', 'title', 'content',)
     search_fields = ('title', 'content',)
     list_editable = ('is_published',)
     list_filter = ('is_published', 'time_create',)

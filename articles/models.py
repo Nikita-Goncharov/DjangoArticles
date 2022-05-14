@@ -1,8 +1,8 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 
 class Article(models.Model):
-    author = models.CharField(max_length=100, verbose_name='Author')
+    user = models.CharField(max_length = 200)
     title = models.CharField(max_length=250, verbose_name='Title')
     content = models.TextField(verbose_name='Content')
     photo = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name='Photo')

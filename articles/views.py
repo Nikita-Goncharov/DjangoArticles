@@ -1,3 +1,4 @@
+from urllib import request
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from django.views.generic.edit import FormView
@@ -17,16 +18,30 @@ def about(request):
     return render(request, 'articles/about.html')
 
 
+def article(request, article_id):
+    artic = Article.objects.get(pk=article_id)
+    context = {
+        'artic': artic,
+    }
+    return render(request, 'articles/read_article.html', context)
+
 def contact(request):
     return render(request, 'articles/contact.html')
 
 
 def your_articles(request):
-    return render(request, 'articles/your_articles.html')
+    artic = Article.objects.filter(user=request.user.username)
+    context = {
+        'artic': artic,
+    }
+    return render(request, 'articles/your_articles.html', context)
 
 
 # def write_article(request):
 #     return render(request, 'articles/write_article.html')
+
+def pageNotFound(request, exception):
+    return render(request, 'articles/404.html')
 
 
 
@@ -51,7 +66,9 @@ class WriteArticle(FormView):
         return context
 
     def form_valid(self, form):
-        form.save()
+        f = form.save(commit=False)
+        f.user = self.request.user.username
+        f.save()
         return redirect(self.success_url)
 
 

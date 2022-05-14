@@ -1,0 +1,13 @@
+{% extends 'articles/base.html' %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+<h1>Read article</h1>
+<img height="100px" width="100px" src="{{ artic.photo.url }}" alt="">
+<h3>{{ artic.title }}</h3>
+<h4>{{ artic.user }}</h4>
+<p>{{ artic.content }}</p>
+<p>{{ artic.time_update }}</p>
+<a href="{% url 'articles' %}">Back</a>
+{% endblock %}

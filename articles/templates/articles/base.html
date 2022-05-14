@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'articles/css/master.css' %}">
 </head>
 <body>     
-    <header class="bg-dark">
+    <header class="bg-dark ">
         <nav class="p-2">
             <a class="navbar-brand text-white">CodArticles</a>
             {% if request.user.is_authenticated %}
@@ -23,18 +23,31 @@
             {% endif %}
         </nav>
     </header>
-    <aside class="sidebar">
-        <ul>
-            <li><a href="{% url 'articles' %}">Articles</a></li>
+    <aside class="sidebar" id="side">
+            <a href="{% url 'articles' %}">Articles</a>
             {% if request.user.is_authenticated %}
-            <li><a href="{% url 'write_article' %}">Write article</a></li>
-            <li><a href="{% url 'your_articles' %}">Your articles</a></li>
-            <li><a href="{% url 'profile' %}">Profile</a></li>
+            <a href="{% url 'write_article' %}">Write article</a>
+            <a href="{% url 'your_articles' %}">Your articles</a>
+            <a href="{% url 'profile' %}">Profile</a>
             {% endif %}
-            <li><a href="{% url 'contact' %}">Contact</a></li>
-            <li><a href="{% url 'about' %}">About</a></li>
-        </ul>
+            <a href="{% url 'contact' %}">Contact</a>
+            <a href="{% url 'about' %}">About</a>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()"><i class="fa fa-bars"></i></a>
+        <!-- <a href="#home" class="active">Home</a>
+        <a href="#news">News</a>
+        <a href="#contact">Contact</a>
+        <a href="#about">About</a> --> 
     </aside>
+    <script>
+        function myFunction() {
+          var x = document.getElementById("side");
+          if (x.className === "sidebar") {
+            x.className += " responsive";
+          } else {
+            x.className = "sidebar";
+          }
+        }
+    </script>
       <!-- Page content -->
       <main class="content">
         {% block content %}{% endblock %}

@@ -4,4 +4,9 @@
 
 {% block content %}
 <h1>Your articles</h1>
+{% for ar in artic %}
+<h3>{{ ar.title }}</h3>
+<p>{{ ar.content }}</p>
+<p>{{ ar.time_update }}</p>
+{% endfor %}
 {% endblock %}

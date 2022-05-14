@@ -11,4 +11,5 @@ urlpatterns = [
     path('write_article/', views.WriteArticle.as_view(), name='write_article'),
     path('your_articles', views.your_articles, name='your_articles'),
     path('profile', views.profile, name='profile'),
+    path('article/<int:article_id>', views.article, name='article')
 ]

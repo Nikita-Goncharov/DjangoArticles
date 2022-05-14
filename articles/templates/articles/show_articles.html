@@ -5,8 +5,9 @@
 {% block content %}
 {% for ar in posts %}
 <h3>{{ ar.title }}</h3>
-<h4>{{ ar.author }}</h4>
+<h4>{{ ar.user }}</h4>
 <p>{{ ar.content }}</p>
 <p>{{ ar.time_update }}</p>
+<a href="{% url 'article' ar.pk %}">Read article</a>
 {% endfor %}
 {% endblock %}
