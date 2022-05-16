@@ -3,11 +3,19 @@
 {% block title %}Articles{% endblock %}
 
 {% block content %}
+<a href="{% url 'articles' %}">ALL Categories</a>
+{% for category in cats %}
+<a href="{% url 'category' category.pk %}">{{ category.name }}</a>
+{% endfor %}
+
 {% for ar in posts %}
-<h3>{{ ar.title }}</h3>
-<h4>{{ ar.user }}</h4>
-<p>{{ ar.content }}</p>
-<p>{{ ar.time_update }}</p>
-<a href="{% url 'article' ar.pk %}">Read article</a>
+<div class="article">
+    <h6>Category: {{ ar.category }}</h6>
+    <h3>{{ ar.title }}</h3>
+    <h4>Author: {{ ar.user }}</h4>
+    <p>{{ ar.content|truncatewords:50 }}</p>
+    <p>{{ ar.time_update|date:"D d M Y" }}</p>
+    <a href="{% url 'article' ar.pk %}">Read article</a>
+</div>
 {% endfor %}
 {% endblock %}

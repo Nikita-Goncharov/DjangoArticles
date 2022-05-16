@@ -1,12 +1,23 @@
 {% extends 'articles/base.html' %}
 
+{% load static %}
 {% block title %}Login{% endblock %}
 
+{% block head %}
+<link rel="stylesheet" href="{% static 'articles/css/login.css' %}">
+{% endblock %}
+
 {% block content %}
-<h1>Login</h1>
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
+    <h1>Login</h1>
+    <div class="form-outline mb-4">
+        {{ form.username }}
+    </div>
+    <div class="form-outline mb-4">
+        {{ form.password }}
+    </div>
+        <button class="btn btn-primary" type="submit">Login</button>
+        <a class="text-muted" href="#">Forgot password?</a>
 </form>
 {% endblock %}

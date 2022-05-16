@@ -1,0 +1,27 @@
+{% extends 'articles/base.html' %}
+
+{% block title %}Category-{{ cat.name }}{% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block content %}
+<a href="{% url 'articles' %}">ALL Categories</a>
+{% for category in cats %}
+<a href="{% url 'category' category.pk %}">{{ category.name }}</a>
+{% endfor %}
+
+{% if cat_posts %}
+{% for post in cat_posts %}
+<div class="article">
+    <h6>Category: {{ post.category }}</h6>
+    <h3>{{ post.title }}</h3>
+    <h4>Author: {{ post.user }}</h4>
+    <p>{{ post.content|truncatewords:50 }}</p>
+    <p>{{ post.time_update|date:"D d M Y" }}</p>
+    <a href="{% url 'article' post.pk %}">Read article</a>
+</div>
+{% endfor %}
+{% else %}
+<h1>Zero articles in this category</h1>
+{% endif %}
+{% endblock %}

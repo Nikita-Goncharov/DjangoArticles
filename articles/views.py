@@ -1,10 +1,11 @@
-from urllib import request
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from django.views.generic.edit import FormView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import logout, login
 from django.shortcuts import redirect, render
+from django.contrib.auth.decorators import login_required
 from .models import *
 from .forms import *
 
@@ -25,10 +26,12 @@ def article(request, article_id):
     }
     return render(request, 'articles/read_article.html', context)
 
+
 def contact(request):
     return render(request, 'articles/contact.html')
 
 
+@login_required
 def your_articles(request):
     artic = Article.objects.filter(user=request.user.username)
     context = {
@@ -37,26 +40,36 @@ def your_articles(request):
     return render(request, 'articles/your_articles.html', context)
 
 
-# def write_article(request):
-#     return render(request, 'articles/write_article.html')
-
 def pageNotFound(request, exception):
     return render(request, 'articles/404.html')
 
-
-
+@login_required
 def profile(request):
     return render(request, 'articles/profile.html')
 
+
 def show_articles(request):
     posts = Article.objects.all()
+    cats = Category.objects.all()
     context = {
-        'posts': posts
+        'posts': posts,
+        'cats': cats
     }
     return render(request, 'articles/show_articles.html', context)
 
 
-class WriteArticle(FormView):
+def category(request, cat_id):
+    cat_posts = Article.objects.filter(category=cat_id)
+    cat = Category.objects.get(pk=cat_id)
+    cats = Category.objects.all()
+    context = {
+        'cat_posts': cat_posts,
+        'cat': cat,
+        'cats': cats
+    }
+    return render(request, 'articles/category.html', context)
+
+class WriteArticle(LoginRequiredMixin, FormView):
     form_class = WriteArticleForm
     template_name = 'articles/write_article.html'
     success_url = reverse_lazy('your_articles')
