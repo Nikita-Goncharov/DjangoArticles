@@ -1,0 +1,30 @@
+.login_form{
+    text-align: center;
+    margin: auto;
+    height: auto;
+    padding: 40px 20px;
+}
+
+.login_form button{
+    width: 300px;
+}
+
+.username, .password, .email, .password1, .password2{
+    width: 300px;
+    padding: 5px 10px;
+    outline: none;
+}
+
+.login_form div{
+    margin: 20px;
+}
+
+@media screen and (max-width: 600px){
+    .login_form button{
+        width: 200px;
+    }
+
+    .login_form .username, .password, .email, .password1, .password2{
+        width: 200px;
+    }
+}

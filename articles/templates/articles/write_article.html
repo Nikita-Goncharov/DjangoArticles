@@ -1,12 +1,32 @@
 {% extends 'articles/base.html' %}
+{% load static %}
 
 {% block title %}Write article{% endblock %}
 
+{% block head %}
+<link rel="stylesheet" href="{% static 'articles/css/write_form.css' %}">
+{% endblock %}
+
 {% block content %}
-<h1>Write</h1>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Add article</button>
-</form>
+<div class="container">  
+    <form class="write_form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h1>Write article</h1>
+        <fieldset>
+            {{ form.title }}
+        </fieldset>
+        <fieldset>
+            {{ form.content }}
+        </fieldset>
+        <fieldset>
+            {{ form.photo }}
+        </fieldset>
+        <fieldset>
+            {{ form.category }}
+        </fieldset>
+      <fieldset>
+        <button class="btn btn-primary" type="submit">Add article</button>
+      </fieldset>
+    </form>
+  </div>
 {% endblock %}

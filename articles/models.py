@@ -1,3 +1,4 @@
+from distutils.command.upload import upload
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -31,3 +32,10 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+
+# class SetupAccount(models.Model):
+#     account_photo = models.ImageField(upload_to='account_photo/%Y/%m/%d', verdose_name='Account photo')
+#     biography = models.TextField(verbose_name='Biography')
+#     status = models.CharField(max_length=100, verbose_name='Status')
+    

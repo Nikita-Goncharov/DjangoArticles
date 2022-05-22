@@ -6,7 +6,11 @@
 <h1>Read article</h1>
 <img height="100px" width="100px" src="{{ artic.photo.url }}" alt="">
 <h3>{{ artic.title }}</h3>
-<h4>{{ artic.user }}</h4>
+{% if artic.user == request.user.username %}
+<h4>Author: <a href="{% url 'profile' %}">{{ artic.user }}</a></h4>
+{% else %}
+<h4>Author: <a href="{% url 'others_profile' artic.user %}">{{ artic.user }}</a></h4>
+{% endif %}
 <p>{{ artic.content }}</p>
 <p>{{ artic.time_update }}</p>
 <a href="{% url 'articles' %}">Back</a>

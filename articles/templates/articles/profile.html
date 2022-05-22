@@ -3,5 +3,8 @@
 {% block title %}Your profile{% endblock %}
 
 {% block content %}
-<h1>Profile</h1>
+<h3>Profile</h3>
+<!-- <a href="">Account Setup</a> -->
+<h1>{{ request.user.username }}</h1>
+<h5>Articles: {{ count_articles }}</h5>
 {% endblock %}

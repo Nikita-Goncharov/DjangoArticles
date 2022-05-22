@@ -4,11 +4,19 @@
 
 {% block content %}
 <h1>Your articles</h1>
+{% if artic %}
 {% for ar in artic %}
 <div class="article">
+    <h6>Category: {{ ar.category }}</h6>
     <h3>{{ ar.title }}</h3>
-    <p>{{ ar.content }}</p>
-    <p>{{ ar.time_update }}</p>
+    <p>{{ ar.content|truncatewords:50 }}</p>
+    <p>{{ ar.time_update|date:"D d M Y" }}</p>
+    <a href="{% url 'article' ar.pk %}">Read article</a>
+    <a href="{% url 'delete' ar.pk %}">Delete</a>
+    <a href="{% url 'update' ar.pk %}">Update</a>
 </div>
 {% endfor %}
+{% else %}
+<h1>Zero articles</h1>
+{% endif %}
 {% endblock %}

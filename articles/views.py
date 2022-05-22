@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView, DeleteView
 from django.views.generic.edit import FormView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import logout, login
@@ -13,6 +13,17 @@ from .forms import *
 def logout_user(request):
     logout(request)
     return redirect('login')
+
+
+@login_required
+def delete_article(request, del_id):
+    article = Article.objects.get(pk=del_id)
+    article.delete()
+    return redirect('your_articles')
+
+
+# def account_setup(request):
+#     pass     
 
 
 def about(request):
@@ -45,7 +56,12 @@ def pageNotFound(request, exception):
 
 @login_required
 def profile(request):
-    return render(request, 'articles/profile.html')
+    count_articles = len(Article.objects.filter(user=request.user.username))
+    context = {
+        'count_articles': count_articles,
+        
+    }
+    return render(request, 'articles/profile.html', context)
 
 
 def show_articles(request):
@@ -68,6 +84,21 @@ def category(request, cat_id):
         'cats': cats
     }
     return render(request, 'articles/category.html', context)
+
+
+def others_profile(request, user_name):
+    context = {
+        'user_name': user_name
+    }
+    return render(request, 'articles/others_profile.html', context) 
+
+
+class UpdateArticle(UpdateView):
+    model = Article
+    form_class = WriteArticleForm
+    template_name = 'articles/write_article.html'
+    success_url = reverse_lazy('your_articles')
+
 
 class WriteArticle(LoginRequiredMixin, FormView):
     form_class = WriteArticleForm

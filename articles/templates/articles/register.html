@@ -1,12 +1,22 @@
 {% extends 'articles/base.html' %}
-
+{% load static %}
 {% block title %}Register{% endblock %}
 
+{% block head %}
+<link rel="stylesheet" href="{% static 'articles/css/login_register.css' %}">
+{% endblock %}
+
 {% block content %}
-<h1>Register</h1>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Register</button>
-</form>
+<div class="login_form">
+    <form method="post">
+        {% csrf_token %}
+        <h1>Register</h1>
+        <div>{{ form.username }}</div>
+        <div>{{ form.email }}</div>
+        <div>{{ form.password1 }}</div>
+        <div>{{ form.password2 }}</div>
+        <div><button class="btn btn-primary" type="submit">Register</button></div>
+        <div><a class="text-muted" href="{% url 'login' %}">You already have an account ?</a></div>
+    </form>
+</div>
 {% endblock %}

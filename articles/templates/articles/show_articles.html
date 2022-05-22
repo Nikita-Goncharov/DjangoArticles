@@ -3,19 +3,28 @@
 {% block title %}Articles{% endblock %}
 
 {% block content %}
-<a href="{% url 'articles' %}">ALL Categories</a>
-{% for category in cats %}
-<a href="{% url 'category' category.pk %}">{{ category.name }}</a>
-{% endfor %}
-
+<div class="categories">
+    <a class="cat" href="{% url 'articles' %}">ALL Categories</a>
+    {% for category in cats %}
+    <a class="cat" href="{% url 'category' category.pk %}">{{ category.name }}</a>
+    {% endfor %}
+</div>
+{% if posts %}
 {% for ar in posts %}
 <div class="article">
     <h6>Category: {{ ar.category }}</h6>
     <h3>{{ ar.title }}</h3>
-    <h4>Author: {{ ar.user }}</h4>
+    {% if ar.user == request.user.username %}
+    <h4>Author: <a href="{% url 'profile' %}">{{ ar.user }}</a></h4>
+    {% else %}
+    <h4>Author: <a href="{% url 'others_profile' ar.user %}">{{ ar.user }}</a></h4>
+    {% endif %}
     <p>{{ ar.content|truncatewords:50 }}</p>
     <p>{{ ar.time_update|date:"D d M Y" }}</p>
     <a href="{% url 'article' ar.pk %}">Read article</a>
 </div>
 {% endfor %}
+{% else %}
+<h1>Zero articles</h1>
+{% endif %}
 {% endblock %}

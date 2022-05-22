@@ -1,0 +1,38 @@
+
+.container {
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+    margin: 20px auto 0;
+}
+
+.write_form {
+  padding: 25px;
+}
+
+fieldset {
+  margin: 0 0 10px;
+  min-width: 100%;
+  width: 100%;
+}
+
+.content_form {
+  height: 250px;
+  max-width: 100%;
+  border: 1px solid #838996;
+  padding: 5px;
+  outline: none;
+}
+
+.title, .category{
+    padding: 5px;
+    width: 100%;
+    outline: none;
+    border: 1px solid #838996;
+}
+
+button{
+  cursor: pointer;
+  width: 100%;
+  padding: 10px;
+}

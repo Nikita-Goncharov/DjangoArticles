@@ -5,10 +5,12 @@
 {% block head %}{% endblock %}
 
 {% block content %}
-<a href="{% url 'articles' %}">ALL Categories</a>
-{% for category in cats %}
-<a href="{% url 'category' category.pk %}">{{ category.name }}</a>
-{% endfor %}
+<div class="categories">
+    <a class="cat" href="{% url 'articles' %}">ALL Categories</a>
+    {% for category in cats %}
+    <a class="cat" href="{% url 'category' category.pk %}">{{ category.name }}</a>
+    {% endfor %}
+</div>
 
 {% if cat_posts %}
 {% for post in cat_posts %}
