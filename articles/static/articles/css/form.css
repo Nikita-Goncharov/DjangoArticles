@@ -6,7 +6,7 @@
     margin: 20px auto 0;
 }
 
-.write_form {
+.form {
   padding: 25px;
 }
 
@@ -16,7 +16,7 @@ fieldset {
   width: 100%;
 }
 
-.content_form {
+.content_form, .message {
   height: 250px;
   max-width: 100%;
   border: 1px solid #838996;

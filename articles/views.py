@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, UpdateView, DeleteView
+from django.views.generic import CreateView, UpdateView
 from django.views.generic.edit import FormView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import logout, login
@@ -10,6 +10,7 @@ from .models import *
 from .forms import *
 
 
+@login_required
 def logout_user(request):
     logout(request)
     return redirect('login')
@@ -20,10 +21,6 @@ def delete_article(request, del_id):
     article = Article.objects.get(pk=del_id)
     article.delete()
     return redirect('your_articles')
-
-
-# def account_setup(request):
-#     pass     
 
 
 def about(request):
@@ -38,8 +35,26 @@ def article(request, article_id):
     return render(request, 'articles/read_article.html', context)
 
 
-def contact(request):
-    return render(request, 'articles/contact.html')
+# def contact(request):
+#     return render(request, 'articles/contact.html')
+class ContactFormView(FormView):
+    template_name = 'articles/contact.html'
+    form_class = ContactForm
+    success_url = reverse_lazy('articles')
+
+    def form_valid(self, form):
+        message = "{name} / {email} said: ".format(
+        name=form.cleaned_data.get('name'),
+        email=form.cleaned_data.get('email'))
+        message += "\n\n{0}".format(form.cleaned_data.get('message'))
+        send_mail(
+        'Contact Form',
+        message,
+        'contactemaildjango@gmail.com',
+        ['contactemaildjango@gmail.com'],
+        fail_silently=False,
+        )
+        return super().form_valid(form)
 
 
 @login_required
@@ -53,6 +68,7 @@ def your_articles(request):
 
 def pageNotFound(request, exception):
     return render(request, 'articles/404.html')
+
 
 @login_required
 def profile(request):
@@ -87,13 +103,15 @@ def category(request, cat_id):
 
 
 def others_profile(request, user_name):
+    posts = Article.objects.filter(user=user_name)
     context = {
-        'user_name': user_name
+        'user_name': user_name,
+        'posts': posts
     }
     return render(request, 'articles/others_profile.html', context) 
 
 
-class UpdateArticle(UpdateView):
+class UpdateArticle(LoginRequiredMixin, UpdateView):
     model = Article
     form_class = WriteArticleForm
     template_name = 'articles/write_article.html'

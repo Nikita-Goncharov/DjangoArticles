@@ -1,7 +1,29 @@
 {% extends 'articles/base.html' %}
+{% load static %}
 
-{% block title %}Contacts{% endblock %}
+{% block title %}Contact{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'articles/css/form.css' %}">
+{% endblock %}
 
 {% block content %}
-
+<div class="container">  
+    <form class="form" method="post">
+        {% csrf_token %}
+        <h1>Contact us</h1>
+        <fieldset>
+            {{ form.name }}
+        </fieldset>
+        <fieldset>
+            {{ form.email }}
+        </fieldset>
+        <fieldset>
+            {{ form.message }}
+        </fieldset>
+        <fieldset>
+            <button class="btn btn-primary" type="submit">Send message</button>
+        </fieldset>
+    </form>
+</div>
 {% endblock %}

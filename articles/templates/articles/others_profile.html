@@ -1,7 +1,25 @@
 {% extends 'articles/base.html' %}
 
-{% block title %}{{ user_name }}{% endblock %}
+{% block title %}Profile-{{ user_name }}{% endblock %}
 
 {% block content %}
-<h1>Profile of {{ user_name }}</h1>
+<h1><b>{{ user_name }}</b> profile</h1>
+{% if posts %}
+{% for ar in posts %}
+<div class="article posts_profile">
+    <h6>Category: {{ ar.category }}</h6>
+    <h3>{{ ar.title }}</h3>
+    {% if ar.user == request.user.username %}
+    <h4>Author: <a href="{% url 'profile' %}">{{ ar.user }}</a></h4>
+    {% else %}
+    <h4>Author: <a href="{% url 'others_profile' ar.user %}">{{ ar.user }}</a></h4>
+    {% endif %}
+    <p>{{ ar.content|truncatewords:50 }}</p>
+    <p>{{ ar.time_update|date:"D d M Y" }}</p>
+    <a href="{% url 'article' ar.pk %}">Read article</a>
+</div>
+{% endfor %}
+{% else %}
+<h1 class="no_posts">This user has no articles</h1>
+{% endif %}
 {% endblock %}

@@ -4,12 +4,12 @@
 {% block title %}Write article{% endblock %}
 
 {% block head %}
-<link rel="stylesheet" href="{% static 'articles/css/write_form.css' %}">
+<link rel="stylesheet" href="{% static 'articles/css/form.css' %}">
 {% endblock %}
 
 {% block content %}
 <div class="container">  
-    <form class="write_form" method="post" enctype="multipart/form-data">
+    <form class="form" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <h1>Write article</h1>
         <fieldset>

@@ -1,9 +1,13 @@
+import email
+from unicodedata import name
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.contrib.auth.models import User
 from django.forms import ModelForm, TextInput, Textarea, ClearableFileInput, Select
 from django.contrib.auth.forms import  AuthenticationForm
 from .models import *
+
+from django.core.mail import send_mail
 
 
 class RegisterUserForm(UserCreationForm):
@@ -36,3 +40,10 @@ class WriteArticleForm(ModelForm):
             'photo': ClearableFileInput(attrs={'class': 'form-control form-control-sm photo'}),
             'category': Select(attrs={'class': 'category'}),
         }
+
+
+class ContactForm(forms.Form):
+    name = forms.CharField(label='Name', widget=forms.TextInput(attrs={'class': 'form-control username', 'placeholder': 'Name'}))
+    email = forms.EmailField(label='Email', widget=forms.EmailInput(attrs={'class': 'form-control email', 'placeholder': 'Email'}))
+    message = forms.CharField(label='Message', widget=forms.Textarea(attrs={'class': 'form-control message', 'placeholder': 'Message'}))
+

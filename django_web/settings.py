@@ -11,21 +11,31 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
 from pathlib import Path
+import environ
+
+
+env = environ.Env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+environ.Env.read_env(os.path.join(BASE_DIR, 'django_web/.env'))
+
+
+DEBUG = env('DEBUG')
+# SECRET_KEY = env('SECRET_KEY')
+
+SECRET_KEY = 'django-insecure-gpuo4)x6_0gfgfnmlhig8x1nnzsr*%t_jhxaep!757bbg#d*o4'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-%l%gpuo4)x6_06nmlhig8x1nnzsr*%t_jhxaep!757bbg#d*o4'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []  # 
+ALLOWED_HOSTS = [] 
 
 
 # Application definition
@@ -127,3 +137,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
+
+
+EMAIL_USE_TLS = env('EMAIL_USE_TLS')
+EMAIL_HOST = env('EMAIL_HOST')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = env('EMAIL_PORT')
