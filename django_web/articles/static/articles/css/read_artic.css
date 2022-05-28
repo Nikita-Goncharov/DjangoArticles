@@ -1,0 +1,36 @@
+.article_caption{
+    text-align: center;
+    background-color: brown;
+    margin: 10px 0;
+    padding: 10px 20px;
+}
+
+.article_title{
+    padding: 10px 20px;
+    background-color: cadetblue;
+    margin: 10px 0;
+}
+
+.article_content{
+    padding: 10px 20px;
+    margin: 10px 0;
+    background-color: aqua;
+}
+
+.article_author{
+    padding: 10px 20px;
+    margin: 10px 0;
+    background-color: darkgoldenrod;
+}
+
+.article_date{
+    padding: 10px 20px;
+    margin: 10px 0;
+    background-color: coral;
+}
+
+.article_button{
+    padding: 10px 20px;
+    margin: 20px 0;
+    background-color: darkgray;
+}

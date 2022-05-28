@@ -1,17 +1,22 @@
 {% extends 'articles/base.html' %}
+{% load static %}
 
 {% block title %}Article-{{ artic.pk }}{% endblock %}
 
+{% block head %}
+<link rel="stylesheet" href="{% static 'articles/css/read_artic.css' %}">
+{% endblock %}
+
 {% block content %}
-<h1>Read article</h1>
-<img height="100px" width="100px" src="{{ artic.photo.url }}" alt="">
-<h3>{{ artic.title }}</h3>
+<h1 class="article_caption">Read article</h1>
+<img height="auto" width="100%" src="{{ artic.photo.url }}" alt="">
+<h3 class="article_title">{{ artic.title }}</h3>
 {% if artic.user == request.user.username %}
-<h4>Author: <a href="{% url 'profile' %}">{{ artic.user }}</a></h4>
+<h4 class="article_author">Author: <a href="{% url 'profile' %}">{{ artic.user }}</a></h4>
 {% else %}
-<h4>Author: <a href="{% url 'others_profile' artic.user %}">{{ artic.user }}</a></h4>
+<h4 class="article_author">Author: <a href="{% url 'others_profile' artic.user %}">{{ artic.user }}</a></h4>
 {% endif %}
-<p>{{ artic.content }}</p>
-<p>{{ artic.time_update }}</p>
-<a href="{% url 'articles' %}">Back</a>
+<p class="article_content">{{ artic.content }}</p>
+<p class="article_date">{{ artic.time_update }}</p>
+<p class="article_button"><a href="{% url 'articles' %}">Back</a></p> 
 {% endblock %}

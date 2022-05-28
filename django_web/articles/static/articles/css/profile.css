@@ -1,0 +1,19 @@
+.author_caption{
+    text-align: center;
+    background-color: brown;
+    padding: 10px 20px;
+    margin: 10px 0;
+
+}
+
+.author_name{
+    padding: 10px 20px;
+    margin: 10px 0;
+    background-color: burlywood;
+}
+
+.author_count_articles{
+    padding: 10px 20px;
+    margin: 10px 0;
+    background-color: blueviolet;
+}
