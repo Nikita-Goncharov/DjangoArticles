@@ -35,8 +35,6 @@ def article(request, article_id):
     return render(request, 'articles/read_article.html', context)
 
 
-# def contact(request):
-#     return render(request, 'articles/contact.html')
 class ContactFormView(FormView):
     template_name = 'articles/contact.html'
     form_class = ContactForm
