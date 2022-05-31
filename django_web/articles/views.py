@@ -70,7 +70,7 @@ def pageNotFound(request, exception):
 
 @login_required
 def profile(request):
-    count_articles = len(Article.objects.filter(user=request.user.username))
+    count_articles = Article.objects.filter(user=request.user.username).count()
     context = {
         'count_articles': count_articles,
         
