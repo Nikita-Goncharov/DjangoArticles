@@ -1,2 +1,3 @@
-# DjangoArticles
-First project on django
+## DjangoArticles
+
+Веб-сервіс для створення статей з попередньою реєстраціею.
